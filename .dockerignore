@@ -1,0 +1,11 @@
+.git
+.gitignore
+.next
+.env*
+node_modules
+README.md
+.vscode
+*.log
+public/uploads/*
+Dockerfile
+docker-compose.yml

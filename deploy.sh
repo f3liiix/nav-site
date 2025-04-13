@@ -24,14 +24,6 @@ npm install
 echo "生成Prisma客户端..."
 npx prisma generate
 
-# 清除缓存
-echo "清理缓存..."
-./clear-cache.sh
-
-# 格式化代码（修复格式问题）
-echo "格式化代码..."
-npm run format
-
 # 构建应用
 echo "构建应用..."
 NEXT_PUBLIC_APP_VERSION=$VERSION BUILD_ID=$BUILD_ID npm run build
@@ -47,15 +39,8 @@ cat > .next/static/version/info.json << EOF
 }
 EOF
 
-# 清除Nginx缓存（如果需要）
-echo "清除Nginx缓存..."
-# 取消注释并根据您的服务器配置调整以下命令
-bash ./scripts/clear-nginx-cache.sh
-
 # 重启应用（根据您的部署环境调整）
-echo "重启应用..."
-# pm2 restart nav-site
-# 或
-# systemctl restart nav-site
+echo "启动应用..."
+npm start
 
 echo "===== 部署完成 =====" 

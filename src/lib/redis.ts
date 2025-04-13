@@ -1,11 +1,15 @@
 import Redis from 'ioredis';
 
+// 从环境变量获取Redis配置
+const redisConfig = {
+  host: process.env.REDIS_HOST || 'localhost',
+  port: parseInt(process.env.REDIS_PORT || '6379'),
+  db: parseInt(process.env.REDIS_DB || '0'),
+  password: process.env.REDIS_PASSWORD,
+};
+
 // 创建Redis客户端单例
-const redis = new Redis({
-  host: 'localhost',
-  port: 6379,
-  db: 0,
-});
+const redis = new Redis(redisConfig);
 
 // 监听Redis连接事件
 redis.on('connect', () => {

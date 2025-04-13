@@ -1,0 +1,46 @@
+version: '3.8'
+
+services:
+  web:
+    build: 
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    depends_on:
+      - db
+      - redis
+    environment:
+      - DATABASE_URL=mysql://${MYSQL_USER}:${MYSQL_PASSWORD}@db:3306/${MYSQL_DATABASE}
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+      - REDIS_URL=redis://${REDIS_HOST}:${REDIS_PORT}
+    volumes:
+      - ./public/uploads:/app/public/uploads
+    restart: always
+
+  db:
+    image: mysql:8.0
+    environment:
+      - MYSQL_DATABASE=${MYSQL_DATABASE}
+      - MYSQL_USER=${MYSQL_USER}
+      - MYSQL_PASSWORD=${MYSQL_PASSWORD}
+      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+    volumes:
+      - mysql_data:/var/lib/mysql
+    ports:
+      - "3306:3306"
+    command: --default-authentication-plugin=mysql_native_password
+    restart: always
+
+  redis:
+    image: redis:7-alpine
+    volumes:
+      - redis_data:/data
+    ports:
+      - "6379:6379"
+    restart: always
+
+volumes:
+  mysql_data:
+  redis_data:
