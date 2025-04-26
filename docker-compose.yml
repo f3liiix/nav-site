@@ -2,11 +2,11 @@ version: '3.8'
 
 services:
   web:
-    build: 
+    build:
       context: .
       dockerfile: Dockerfile
     ports:
-      - "3000:3000"
+      - '3000:3000'
     depends_on:
       - db
       - redis
@@ -29,7 +29,7 @@ services:
     volumes:
       - mysql_data:/var/lib/mysql
     ports:
-      - "3306:3306"
+      - '3306:3306'
     command: --default-authentication-plugin=mysql_native_password
     restart: always
 
@@ -38,7 +38,7 @@ services:
     volumes:
       - redis_data:/data
     ports:
-      - "6379:6379"
+      - '6379:6379'
     restart: always
 
 volumes:
