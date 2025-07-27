@@ -1,7 +1,13 @@
 /** @type {import('next').NextConfig} */
 const config = {
   images: {
-    domains: ['localhost'],
+    domains: [
+      {
+        protocol: 'https',
+        hostname: 'localhost',
+        pathname: '/**',
+      },
+    ],
     unoptimized: process.env.NODE_ENV === 'development',
   },
   // 添加构建ID，确保每次构建生成不同的资源URL
