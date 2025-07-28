@@ -10,22 +10,26 @@ services:
     depends_on:
       - db
       - redis
+    env_file:
+      - .env
     environment:
-      - DATABASE_URL=mysql://${MYSQL_USER}:${MYSQL_PASSWORD}@db:3306/${MYSQL_DATABASE}
+      - DATABASE_URL=mysql://${MYSQL_USER:-nav_user}:${MYSQL_PASSWORD:-your_password_here}@db:3306/${MYSQL_DATABASE:-nav_site}
       - REDIS_HOST=redis
       - REDIS_PORT=6379
-      - REDIS_URL=redis://${REDIS_HOST}:${REDIS_PORT}
+      - REDIS_URL=redis://redis:6379
     volumes:
       - ./public/uploads:/app/public/uploads
     restart: always
 
   db:
-    image: mysql:8.0
+    image: mysql:5.7
+    env_file:
+      - .env
     environment:
-      - MYSQL_DATABASE=${MYSQL_DATABASE}
-      - MYSQL_USER=${MYSQL_USER}
-      - MYSQL_PASSWORD=${MYSQL_PASSWORD}
-      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+      - MYSQL_DATABASE=${MYSQL_DATABASE:-nav_site}
+      - MYSQL_USER=${MYSQL_USER:-nav_user}
+      - MYSQL_PASSWORD=${MYSQL_PASSWORD:-your_password_here}
+      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD:-your_root_password_here}
     volumes:
       - mysql_data:/var/lib/mysql
     ports:

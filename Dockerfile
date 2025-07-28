@@ -2,15 +2,18 @@
 FROM node:18-alpine AS builder
 WORKDIR /app
 
+# 设置npm镜像源和配置，优化网络连接
+RUN npm config set registry https://registry.npmmirror.com
+
 # 1. 先复制依赖清单和 Prisma 文件
 COPY package*.json ./
 COPY prisma ./prisma/
 
 # 2. 安装依赖（此时 prisma/schema.prisma 已存在）
-RUN npm install
+RUN npm install --prefer-offline --no-audit --no-fund
 
-# 3. 生成 Prisma 客户端（如果 package.json 的 postinstall 已包含，可省略此行）
-# RUN npx prisma generate
+# 3. 生成 Prisma 客户端
+RUN npx prisma generate
 
 # 4. 复制其他文件并构建
 COPY . .
