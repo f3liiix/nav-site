@@ -28,9 +28,17 @@ export async function POST(request: NextRequest) {
     }
 
     // 验证文件类型
-    const validTypes = ['image/jpeg', 'image/png', 'image/gif', 'image/webp', 'image/svg+xml'];
+    const validTypes = [
+      'image/jpeg',
+      'image/png',
+      'image/gif',
+      'image/webp',
+      'image/svg+xml',
+    ];
     if (!validTypes.includes(file.type)) {
-      return errorResponse('不支持的文件类型，请上传JPG、PNG、GIF、WEBP或SVG格式的图片');
+      return errorResponse(
+        '不支持的文件类型，请上传JPG、PNG、GIF、WEBP或SVG格式的图片'
+      );
     }
 
     // 验证文件大小（最大5MB）

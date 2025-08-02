@@ -1,7 +1,17 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { Card, Row, Col, Statistic, Table, Button, Avatar, Typography, Flex } from 'antd';
+import {
+  Card,
+  Row,
+  Col,
+  Statistic,
+  Table,
+  Button,
+  Avatar,
+  Typography,
+  Flex,
+} from 'antd';
 import {
   AppstoreOutlined,
   TagsOutlined,
@@ -96,7 +106,14 @@ export default function AdminDashboard() {
       render: (_: unknown, record: PopularService) => (
         <Flex align="center">
           {record.icon ? (
-            <div style={{ marginRight: 8, flexShrink: 0, display: 'flex', alignItems: 'center' }}>
+            <div
+              style={{
+                marginRight: 8,
+                flexShrink: 0,
+                display: 'flex',
+                alignItems: 'center',
+              }}
+            >
               {isSvg(record.icon) ? (
                 <Image
                   src={record.icon}
@@ -117,9 +134,15 @@ export default function AdminDashboard() {
               )}
             </div>
           ) : (
-            <Avatar icon={<GlobalOutlined />} size={32} style={{ marginRight: 8, flexShrink: 0 }} />
+            <Avatar
+              icon={<GlobalOutlined />}
+              size={32}
+              style={{ marginRight: 8, flexShrink: 0 }}
+            />
           )}
-          <span style={{ display: 'flex', alignItems: 'center' }}>{record.name}</span>
+          <span style={{ display: 'flex', alignItems: 'center' }}>
+            {record.name}
+          </span>
         </Flex>
       ),
     },
@@ -132,7 +155,8 @@ export default function AdminDashboard() {
       title: '点击次数',
       dataIndex: 'clickCount',
       key: 'clickCount',
-      sorter: (a: PopularService, b: PopularService) => a.clickCount - b.clickCount,
+      sorter: (a: PopularService, b: PopularService) =>
+        a.clickCount - b.clickCount,
     },
     {
       title: '操作',

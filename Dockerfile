@@ -12,13 +12,12 @@ COPY prisma ./prisma/
 # 2. 安装依赖（此时 prisma/schema.prisma 已存在）
 RUN npm install --prefer-offline --no-audit --no-fund
 
-# 3. 生成 Prisma 客户端
-RUN npx prisma generate
+# 3. 生成 Prisma 客户端（使用临时数据库URL避免连接真实数据库）
+RUN npx prisma generate --schema=./prisma/schema.prisma
 
 # 4. 复制其他文件并构建
 COPY . .
 RUN npm run build
-
 
 # 运行阶段
 FROM node:18-alpine AS runner
@@ -38,9 +37,9 @@ COPY --from=builder /app/node_modules/@prisma ./node_modules/@prisma
 # 安装 OpenSSL（Prisma 需要）
 RUN apk add --no-cache openssl
 
-EXPOSE 3000
+EXPOSE 8080
 
-ENV PORT 3000
+ENV PORT 8080
 ENV HOSTNAME "0.0.0.0"
 
 CMD ["node", "server.js"]

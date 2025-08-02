@@ -1,6 +1,10 @@
 import { NextRequest } from 'next/server';
 import { prisma } from '@/lib/prisma';
-import { successResponse, errorResponse, serverErrorResponse } from '@/utils/api';
+import {
+  successResponse,
+  errorResponse,
+  serverErrorResponse,
+} from '@/utils/api';
 import { RouteContext } from '../../../admin/categories/[id]/route';
 
 // 增加服务点击次数

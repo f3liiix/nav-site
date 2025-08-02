@@ -60,7 +60,9 @@ export default async function TagsPage() {
 
   // 按服务数量分组
   const popularTags = tags.filter(tag => tag.serviceCount >= 5);
-  const regularTags = tags.filter(tag => tag.serviceCount > 0 && tag.serviceCount < 5);
+  const regularTags = tags.filter(
+    tag => tag.serviceCount > 0 && tag.serviceCount < 5
+  );
   const unusedTags = tags.filter(tag => tag.serviceCount === 0);
 
   return (
@@ -142,7 +144,9 @@ export default async function TagsPage() {
       {/* 未使用的标签 */}
       {unusedTags.length > 0 && (
         <div>
-          <h2 className="text-xl font-semibold text-gray-700 mb-4">未使用的标签</h2>
+          <h2 className="text-xl font-semibold text-gray-700 mb-4">
+            未使用的标签
+          </h2>
           <div className="flex flex-wrap gap-3">
             {unusedTags.map(tag => (
               <span

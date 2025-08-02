@@ -17,7 +17,12 @@ import {
   Flex,
 } from 'antd';
 import Image from 'next/image';
-import { PlusOutlined, UploadOutlined, EditOutlined, DeleteOutlined } from '@ant-design/icons';
+import {
+  PlusOutlined,
+  UploadOutlined,
+  EditOutlined,
+  DeleteOutlined,
+} from '@ant-design/icons';
 import type { UploadFile, UploadProps } from 'antd/es/upload/interface';
 import type { ColumnsType } from 'antd/es/table';
 import { useAdminApp } from '@/components/AdminAppProvider';
@@ -130,7 +135,11 @@ export default function BannersPage() {
 
       // 确保imageUrl是字符串
       if (!values.imageUrl || typeof values.imageUrl !== 'string') {
-        if (fileList.length > 0 && fileList[0].response && fileList[0].response.url) {
+        if (
+          fileList.length > 0 &&
+          fileList[0].response &&
+          fileList[0].response.url
+        ) {
           values.imageUrl = fileList[0].response.url;
         } else if (fileList.length > 0 && fileList[0].url) {
           values.imageUrl = fileList[0].url;
@@ -331,10 +340,21 @@ export default function BannersPage() {
       width: 120,
       render: imageUrl => (
         <div
-          style={{ width: 100, height: 50, position: 'relative', cursor: 'pointer' }}
+          style={{
+            width: 100,
+            height: 50,
+            position: 'relative',
+            cursor: 'pointer',
+          }}
           onClick={() => setPreviewImage(imageUrl)}
         >
-          <Image src={imageUrl} alt="头图" fill style={{ objectFit: 'cover' }} unoptimized />
+          <Image
+            src={imageUrl}
+            alt="头图"
+            fill
+            style={{ objectFit: 'cover' }}
+            unoptimized
+          />
         </div>
       ),
     },
@@ -344,7 +364,11 @@ export default function BannersPage() {
       width: 150,
       render: (_, record) => (
         <Space size="middle">
-          <Button type="text" icon={<EditOutlined />} onClick={() => showEditModal(record)} />
+          <Button
+            type="text"
+            icon={<EditOutlined />}
+            onClick={() => showEditModal(record)}
+          />
           <Popconfirm
             title="确定要删除这个头图吗?"
             onConfirm={() => handleDelete(record.id)}
@@ -384,8 +408,16 @@ export default function BannersPage() {
         onCancel={handleCancel}
         confirmLoading={uploading}
       >
-        <Form form={form} layout="vertical" initialValues={{ isActive: true, sortOrder: 0 }}>
-          <Form.Item name="title" label="标题" rules={[{ required: true, message: '请输入标题' }]}>
+        <Form
+          form={form}
+          layout="vertical"
+          initialValues={{ isActive: true, sortOrder: 0 }}
+        >
+          <Form.Item
+            name="title"
+            label="标题"
+            rules={[{ required: true, message: '请输入标题' }]}
+          >
             <Input placeholder="请输入标题" />
           </Form.Item>
 
@@ -402,7 +434,12 @@ export default function BannersPage() {
             label="描述"
             rules={[{ required: false, message: '请输入描述' }]}
           >
-            <Input.TextArea placeholder="请输入描述" rows={3} showCount maxLength={200} />
+            <Input.TextArea
+              placeholder="请输入描述"
+              rows={3}
+              showCount
+              maxLength={200}
+            />
           </Form.Item>
 
           <Form.Item
@@ -431,14 +468,22 @@ export default function BannersPage() {
             <Switch />
           </Form.Item>
 
-          <Form.Item name="sortOrder" label="排序值" tooltip="数值越小排序越靠前">
+          <Form.Item
+            name="sortOrder"
+            label="排序值"
+            tooltip="数值越小排序越靠前"
+          >
             <InputNumber min={0} />
           </Form.Item>
         </Form>
       </Modal>
 
       {/* 图片预览模态框 */}
-      <Modal open={!!previewImage} footer={null} onCancel={() => setPreviewImage(null)}>
+      <Modal
+        open={!!previewImage}
+        footer={null}
+        onCancel={() => setPreviewImage(null)}
+      >
         <div style={{ position: 'relative', width: '100%', height: '500px' }}>
           {previewImage && (
             <Image

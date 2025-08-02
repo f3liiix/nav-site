@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { compare } from 'bcrypt';
+import { compare } from 'bcryptjs';
 import { prisma } from '@/lib/prisma';
 import { setAuthCookie } from '@/utils/auth';
 import { errorResponse, serverErrorResponse } from '@/utils/api';

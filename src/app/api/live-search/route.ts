@@ -33,7 +33,10 @@ export async function GET(request: NextRequest) {
     // 使用MySQL的LIKE查询搜索服务
     const services = await prisma.service.findMany({
       where: {
-        OR: [{ name: { contains: trimmedQuery } }, { description: { contains: trimmedQuery } }],
+        OR: [
+          { name: { contains: trimmedQuery } },
+          { description: { contains: trimmedQuery } },
+        ],
       },
       select: {
         id: true,

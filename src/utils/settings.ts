@@ -22,7 +22,9 @@ interface SettingRecord {
 export async function getSiteSettings(): Promise<SiteSettings> {
   try {
     // 获取所有设置
-    const settings = await prisma.$queryRaw<SettingRecord[]>`SELECT * FROM Setting`;
+    const settings = await prisma.$queryRaw<
+      SettingRecord[]
+    >`SELECT * FROM Setting`;
 
     // 转换为对象格式
     const settingsObject = settings.reduce(
@@ -36,7 +38,8 @@ export async function getSiteSettings(): Promise<SiteSettings> {
     // 设置默认值
     const result = {
       siteName: settingsObject.siteName || 'AI导航',
-      siteDescription: settingsObject.siteDescription || '收录优质AI服务和应用的导航网站',
+      siteDescription:
+        settingsObject.siteDescription || '收录优质AI服务和应用的导航网站',
       statisticsCode: settingsObject.statisticsCode || '',
       seoTitle: settingsObject.seoTitle || '',
       seoKeywords: settingsObject.seoKeywords || '',

@@ -78,7 +78,10 @@ async function getPopularTagsByCategory(): Promise<Record<number, Tag[]>> {
   });
 
   // 按分类ID分组标签
-  const tagsByCategory: Record<number, Map<number, { tag: Tag; count: number }>> = {};
+  const tagsByCategory: Record<
+    number,
+    Map<number, { tag: Tag; count: number }>
+  > = {};
 
   // 统计每个分类下每个标签的使用次数
   for (const serviceTag of serviceTags) {
@@ -167,7 +170,11 @@ export default async function Home() {
               href={`#category-${category.slug}`}
               className="category-nav-link text-gray-600 px-3 py-1 border-2 border-transparent hover:border-brand-100 hover:bg-brand-50 rounded transition-all duration-200 relative group flex items-center"
             >
-              <CategoryIcon icon={category.icon} name={category.name} size={20} />
+              <CategoryIcon
+                icon={category.icon}
+                name={category.name}
+                size={20}
+              />
               <span className="truncate ml-2">{category.name}</span>
               <span className="absolute inset-0 bg-brand-50 border-brand-100 opacity-0 group-[.active-category]:opacity-100 rounded transition-opacity -z-10"></span>
             </a>
@@ -223,7 +230,9 @@ export default async function Home() {
                 {banner.title}
               </Link>
               {banner.description && (
-                <p className="text-gray-500 text-sm mt-2 leading-6">{banner.description}</p>
+                <p className="text-gray-500 text-sm mt-2 leading-6">
+                  {banner.description}
+                </p>
               )}
             </div>
 
@@ -254,7 +263,11 @@ export default async function Home() {
                 className="px-4 py-2 bg-white outline-2 outline-none hover:outline-brand-200 transition-all duration-200 rounded-lg shadow-sm text-gray-700 hover:text-gray-900 flex items-center"
                 data-category-id={`category-${category.slug}`}
               >
-                <CategoryIcon icon={category.icon} name={category.name} size={20} />
+                <CategoryIcon
+                  icon={category.icon}
+                  name={category.name}
+                  size={20}
+                />
                 <span className="ml-2">{category.name}</span>
               </a>
             ))}

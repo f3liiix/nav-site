@@ -18,7 +18,10 @@ export interface TagPageProps {
 }
 
 // 动态生成元数据
-export async function generateMetadata({ params, searchParams }: TagPageProps): Promise<Metadata> {
+export async function generateMetadata({
+  params,
+  searchParams,
+}: TagPageProps): Promise<Metadata> {
   // 解析Promise获取参数
   const resolvedParams = await params;
   const name = decodeURIComponent(resolvedParams.name);
@@ -160,10 +163,17 @@ export default async function TagPage({ params, searchParams }: TagPageProps) {
   const page = typeof pageParam === 'string' ? parseInt(pageParam, 10) || 1 : 1;
 
   const sortByParam = resolvedSearchParams.sort;
-  const sortBy = typeof sortByParam === 'string' && sortByParam === 'new' ? 'createdAt' : 'clicks';
+  const sortBy =
+    typeof sortByParam === 'string' && sortByParam === 'new'
+      ? 'createdAt'
+      : 'clicks';
 
   // 获取标签及其服务
-  const { tag, services, totalCount, totalPages } = await getTagWithServices(name, page, sortBy);
+  const { tag, services, totalCount, totalPages } = await getTagWithServices(
+    name,
+    page,
+    sortBy
+  );
 
   // 如果标签不存在，返回404
   if (!tag) {
@@ -217,8 +227,8 @@ export default async function TagPage({ params, searchParams }: TagPageProps) {
 
       <div className="flex justify-between items-center mb-6">
         <h3 className="text-gray-500">
-          共 <span className="font-medium text-brand-400">{totalCount}</span> 个网站{' '}
-          {totalPages > 1 && `(第 ${page}/${totalPages} 页)`}
+          共 <span className="font-medium text-brand-400">{totalCount}</span>{' '}
+          个网站 {totalPages > 1 && `(第 ${page}/${totalPages} 页)`}
         </h3>
 
         <div className="flex space-x-2">

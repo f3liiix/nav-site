@@ -7,7 +7,7 @@ import {
   errorResponse,
   serverErrorResponse,
 } from '@/utils/api';
-import { compare, hash } from 'bcrypt';
+import { compare, hash } from 'bcryptjs';
 
 // 修改密码
 export async function PUT(request: NextRequest) {

@@ -64,6 +64,6 @@ EOF
 
 # 重启应用（根据您的部署环境调整）
 echo "启动应用..."
-npm start
+PORT=8080 node .next/standalone/server.js
 
 echo "===== 部署完成 ====="

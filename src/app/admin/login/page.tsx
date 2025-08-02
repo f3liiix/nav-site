@@ -64,9 +64,18 @@ export default function LoginPage() {
 
   // 自定义卡片标题，包含Logo和文字
   const cardTitle = (
-    <Space align="center" style={{ display: 'flex', justifyContent: 'center', margin: '15px 0' }}>
+    <Space
+      align="center"
+      style={{ display: 'flex', justifyContent: 'center', margin: '15px 0' }}
+    >
       <div style={{ position: 'relative', width: '36px', height: '36px' }}>
-        <Image src="/logo.svg" alt="网站Logo" fill style={{ objectFit: 'contain' }} priority />
+        <Image
+          src="/logo.svg"
+          alt="网站Logo"
+          fill
+          style={{ objectFit: 'contain' }}
+          priority
+        />
       </div>
       <Title level={4} style={{ margin: 0 }}>
         管理员登录
@@ -86,7 +95,9 @@ export default function LoginPage() {
       <Col xs={22} sm={16} md={12} lg={8} xl={6}>
         <Card
           title={cardTitle}
-          style={{ boxShadow: '0 1px 2px rgba(0,0,0,0.03), 0 2px 4px rgba(0,0,0,0.03)' }}
+          style={{
+            boxShadow: '0 1px 2px rgba(0,0,0,0.03), 0 2px 4px rgba(0,0,0,0.03)',
+          }}
         >
           <Form
             name="login"
@@ -95,11 +106,17 @@ export default function LoginPage() {
             layout="vertical"
             size="large"
           >
-            <Form.Item name="username" rules={[{ required: true, message: '请输入用户名' }]}>
+            <Form.Item
+              name="username"
+              rules={[{ required: true, message: '请输入用户名' }]}
+            >
               <Input prefix={<UserOutlined />} placeholder="用户名" />
             </Form.Item>
 
-            <Form.Item name="password" rules={[{ required: true, message: '请输入密码' }]}>
+            <Form.Item
+              name="password"
+              rules={[{ required: true, message: '请输入密码' }]}
+            >
               <Input.Password prefix={<LockOutlined />} placeholder="密码" />
             </Form.Item>
 

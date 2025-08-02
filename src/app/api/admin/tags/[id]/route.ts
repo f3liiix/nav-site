@@ -11,7 +11,10 @@ import {
 import { redisHelper } from '@/lib/redis';
 
 // 获取单个标签
-export async function GET(request: NextRequest, { params }: { params: Promise<{ id: string }> }) {
+export async function GET(
+  request: NextRequest,
+  { params }: { params: Promise<{ id: string }> }
+) {
   try {
     // 验证管理员身份
     const isAdmin = await verifyAdmin(request);
@@ -45,7 +48,10 @@ export async function GET(request: NextRequest, { params }: { params: Promise<{ 
 }
 
 // 更新标签
-export async function PUT(request: NextRequest, { params }: { params: Promise<{ id: string }> }) {
+export async function PUT(
+  request: NextRequest,
+  { params }: { params: Promise<{ id: string }> }
+) {
   try {
     // 验证管理员身份
     const isAdmin = await verifyAdmin(request);

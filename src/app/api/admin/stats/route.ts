@@ -1,7 +1,11 @@
 import { NextRequest } from 'next/server';
 import { prisma } from '@/lib/prisma';
 import { verifyAdmin } from '@/utils/auth';
-import { successResponse, unauthorizedResponse, serverErrorResponse } from '@/utils/api';
+import {
+  successResponse,
+  unauthorizedResponse,
+  serverErrorResponse,
+} from '@/utils/api';
 
 // 获取统计数据
 export async function GET(request: NextRequest) {

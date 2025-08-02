@@ -36,7 +36,8 @@ export default function SmoothScrollScript() {
           // 获取目标元素的位置
           const elementPosition = targetElement.getBoundingClientRect().top;
           // 当前滚动位置
-          const offsetPosition = elementPosition + window.scrollY - navbarHeight - 30;
+          const offsetPosition =
+            elementPosition + window.scrollY - navbarHeight - 30;
 
           // 先立即更新活动状态，不等待滚动事件
           clearAllActiveStates();
@@ -75,7 +76,9 @@ export default function SmoothScrollScript() {
     // 清除所有高亮状态
     const clearAllActiveStates = () => {
       const desktopNavLinks = document.querySelectorAll('.category-nav-link');
-      const mobileNavLinks = document.querySelectorAll('.xl\\:hidden .category-nav-link');
+      const mobileNavLinks = document.querySelectorAll(
+        '.xl\\:hidden .category-nav-link'
+      );
 
       desktopNavLinks.forEach(link => {
         link.classList.remove('active-category');
@@ -107,7 +110,9 @@ export default function SmoothScrollScript() {
         activeDesktopLink.classList.add('font-medium');
 
         // 确保只有当前分类被高亮显示
-        const allDesktopLinks = document.querySelectorAll('.hidden.xl\\:block .category-nav-link');
+        const allDesktopLinks = document.querySelectorAll(
+          '.hidden.xl\\:block .category-nav-link'
+        );
         allDesktopLinks.forEach(link => {
           if (link !== activeDesktopLink) {
             link.classList.remove('active-category');
@@ -128,7 +133,9 @@ export default function SmoothScrollScript() {
         activeMobileLink.classList.add('font-medium');
 
         // 确保只有当前分类被高亮显示
-        const allMobileLinks = document.querySelectorAll('.xl\\:hidden .category-nav-link');
+        const allMobileLinks = document.querySelectorAll(
+          '.xl\\:hidden .category-nav-link'
+        );
         allMobileLinks.forEach(link => {
           if (link !== activeMobileLink) {
             link.classList.remove('bg-brand-50');
@@ -145,7 +152,9 @@ export default function SmoothScrollScript() {
       const navbarHeight = getNavbarHeight();
 
       // 获取所有分类区块
-      const sections = Array.from(document.querySelectorAll('section[id^="category-"]'));
+      const sections = Array.from(
+        document.querySelectorAll('section[id^="category-"]')
+      );
 
       // 如果没有分类区块，直接返回
       if (sections.length === 0) return;
@@ -160,7 +169,8 @@ export default function SmoothScrollScript() {
       }
 
       // 检查是否滚动到页面底部
-      const isAtBottom = window.innerHeight + window.scrollY >= document.body.offsetHeight - 20;
+      const isAtBottom =
+        window.innerHeight + window.scrollY >= document.body.offsetHeight - 20;
 
       // 如果滚动到页面底部，高亮最后一个分类
       if (isAtBottom && sections.length > 0) {
@@ -217,7 +227,9 @@ export default function SmoothScrollScript() {
     window.addEventListener('resize', handleScroll);
 
     // 监听返回顶部按钮的点击事件
-    const backToTopButtons = document.querySelectorAll('button[aria-label="返回顶部"]');
+    const backToTopButtons = document.querySelectorAll(
+      'button[aria-label="返回顶部"]'
+    );
     backToTopButtons.forEach(button => {
       button.addEventListener('click', () => {
         // 清除所有高亮状态

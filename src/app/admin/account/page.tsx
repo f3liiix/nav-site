@@ -96,7 +96,8 @@ export default function AccountPage() {
 
       <Card title="账号信息" style={{ marginBottom: 24 }}>
         <div>
-          <strong>当前用户：</strong> <Text strong>{adminInfo?.username || '加载中...'}</Text>
+          <strong>当前用户：</strong>{' '}
+          <Text strong>{adminInfo?.username || '加载中...'}</Text>
         </div>
       </Card>
 
@@ -107,7 +108,10 @@ export default function AccountPage() {
             label="当前密码"
             rules={[{ required: true, message: '请输入当前密码' }]}
           >
-            <Input.Password prefix={<LockOutlined />} placeholder="请输入当前密码" />
+            <Input.Password
+              prefix={<LockOutlined />}
+              placeholder="请输入当前密码"
+            />
           </Form.Item>
 
           <Form.Item
@@ -118,7 +122,10 @@ export default function AccountPage() {
               { min: 6, message: '密码长度不能少于6个字符' },
             ]}
           >
-            <Input.Password prefix={<LockOutlined />} placeholder="请输入新密码" />
+            <Input.Password
+              prefix={<LockOutlined />}
+              placeholder="请输入新密码"
+            />
           </Form.Item>
 
           <Form.Item
@@ -136,7 +143,10 @@ export default function AccountPage() {
               }),
             ]}
           >
-            <Input.Password prefix={<LockOutlined />} placeholder="请再次输入新密码" />
+            <Input.Password
+              prefix={<LockOutlined />}
+              placeholder="请再次输入新密码"
+            />
           </Form.Item>
 
           <Form.Item style={{ marginBottom: 0, textAlign: 'right' }}>

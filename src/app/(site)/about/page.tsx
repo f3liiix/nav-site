@@ -32,14 +32,18 @@ export default function AboutPage() {
         </Link>
       </div>
       <div className="bg-white bg-opacity-80 rounded-lg shadow-sm p-8 mb-6">
-        <h1 className="text-3xl font-bold mb-6 text-center text-gray-800">关于我们</h1>
+        <h1 className="text-3xl font-bold mb-6 text-center text-gray-800">
+          关于我们
+        </h1>
 
         <div className="space-y-6 text-gray-600">
           <p>
             123.SS是一个AI网址导航，专注于收录和推荐优质AI服务和应用。我们的使命是帮助用户快速找到适合自己需求的AI工具，提高工作效率和创新能力。
           </p>
 
-          <h2 className="text-xl font-semibold text-gray-700 mt-8">我们的目标</h2>
+          <h2 className="text-xl font-semibold text-gray-700 mt-8">
+            我们的目标
+          </h2>
           <ul className="list-disc pl-6 space-y-2">
             <li>收录全面：覆盖各个领域的AI服务和应用</li>
             <li>精选优质：严格筛选，只推荐高质量的AI工具</li>
@@ -54,7 +58,10 @@ export default function AboutPage() {
           </p>
           <p className="mt-2">
             联系邮箱：
-            <a href="mailto:me@hide.ss" className="text-brand-400 hover:underline">
+            <a
+              href="mailto:me@hide.ss"
+              className="text-brand-400 hover:underline"
+            >
               me@hide.ss
             </a>
           </p>

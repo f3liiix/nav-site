@@ -1,7 +1,11 @@
 import { NextRequest } from 'next/server';
 import { prisma } from '@/lib/prisma';
 import { verifyAdmin, getAdminIdFromRequest } from '@/utils/auth';
-import { successResponse, unauthorizedResponse, serverErrorResponse } from '@/utils/api';
+import {
+  successResponse,
+  unauthorizedResponse,
+  serverErrorResponse,
+} from '@/utils/api';
 
 // 获取当前管理员信息
 export async function GET(request: NextRequest) {

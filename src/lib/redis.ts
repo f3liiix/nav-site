@@ -28,7 +28,11 @@ export const redisHelper = {
     return JSON.parse(value) as T;
   },
 
-  async set<T>(key: string, value: T, options?: { ex?: number }): Promise<'OK'> {
+  async set<T>(
+    key: string,
+    value: T,
+    options?: { ex?: number }
+  ): Promise<'OK'> {
     const serializedValue = JSON.stringify(value);
     if (options?.ex) {
       return redis.set(key, serializedValue, 'EX', options.ex);

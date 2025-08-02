@@ -6,7 +6,7 @@ services:
       context: .
       dockerfile: Dockerfile
     ports:
-      - '3000:3000'
+      - '8080:8080'
     depends_on:
       - db
       - redis
@@ -22,7 +22,7 @@ services:
     restart: always
 
   db:
-    image: mysql:5.7
+    image: mysql:8.0
     env_file:
       - .env
     environment:
@@ -32,8 +32,9 @@ services:
       - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD:-your_root_password_here}
     volumes:
       - mysql_data:/var/lib/mysql
-    ports:
-      - '3306:3306'
+    # 生产环境中建议注释掉下面这行，避免暴露数据库端口
+    # ports:
+    #   - '3306:3306'
     command: --default-authentication-plugin=mysql_native_password
     restart: always
 
@@ -41,8 +42,9 @@ services:
     image: redis:7-alpine
     volumes:
       - redis_data:/data
-    ports:
-      - '6379:6379'
+    # 生产环境中建议注释掉下面这行，避免暴露Redis端口
+    # ports:
+    #   - '6379:6379'
     restart: always
 
 volumes:

@@ -1,38 +1,17 @@
 /** @type {import('next').NextConfig} */
-const config = {
+const nextConfig = {
+  // 为Docker部署添加standalone输出模式
   output: 'standalone',
+
   images: {
     domains: ['localhost'],
-    unoptimized: process.env.NODE_ENV === 'development',
+    unoptimized: true, // 禁用图片优化以避免在standalone模式下的问题
   },
-  // 添加构建ID，确保每次构建生成不同的资源URL
-  generateBuildId: async () => {
-    // 使用时间戳或环境变量作为构建ID
-    return process.env.BUILD_ID || Date.now().toString();
-  },
-  // 添加HTTP头，控制缓存
-  async headers() {
-    return [
-      {
-        // 对所有路由应用这些头，防止浏览器和CDN缓存
-        source: '/:path*',
-        headers: [
-          {
-            key: 'Cache-Control',
-            value: 'no-store, no-cache, must-revalidate, proxy-revalidate',
-          },
-          {
-            key: 'Pragma',
-            value: 'no-cache',
-          },
-          {
-            key: 'Expires',
-            value: '0',
-          },
-        ],
-      },
-    ];
+
+  // 环境变量配置
+  env: {
+    APP_VERSION: process.env.NEXT_PUBLIC_APP_VERSION || '',
   },
 };
 
-export default config;
+export default nextConfig;

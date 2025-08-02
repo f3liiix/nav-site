@@ -83,9 +83,16 @@ export async function PUT(request: NextRequest, context: RouteContext) {
         title: body.title,
         url: body.url,
         imageUrl: body.imageUrl,
-        description: body.description !== undefined ? body.description : existingBanner.description,
-        isActive: body.isActive !== undefined ? body.isActive : existingBanner.isActive,
-        sortOrder: body.sortOrder !== undefined ? body.sortOrder : existingBanner.sortOrder,
+        description:
+          body.description !== undefined
+            ? body.description
+            : existingBanner.description,
+        isActive:
+          body.isActive !== undefined ? body.isActive : existingBanner.isActive,
+        sortOrder:
+          body.sortOrder !== undefined
+            ? body.sortOrder
+            : existingBanner.sortOrder,
       },
     });
 

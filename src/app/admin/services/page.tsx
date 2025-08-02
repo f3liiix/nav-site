@@ -247,10 +247,14 @@ export default function ServicesPage() {
   const [editingId, setEditingId] = useState<number | null>(null);
   const [fileList, setFileList] = useState<UploadFile[]>([]);
   const [previewImage, setPreviewImage] = useState<string | null>(null);
-  const [selectedCategoryId, setSelectedCategoryId] = useState<number | null>(null);
+  const [selectedCategoryId, setSelectedCategoryId] = useState<number | null>(
+    null
+  );
   const [currentPage, setCurrentPage] = useState(1);
   const [pageSize, setPageSize] = useState(10);
-  const [formInitialValues, setFormInitialValues] = useState<Partial<ServiceFormValues>>({});
+  const [formInitialValues, setFormInitialValues] = useState<
+    Partial<ServiceFormValues>
+  >({});
   const [searchText, setSearchText] = useState<string>('');
   const { message } = useAdminApp();
 
@@ -267,7 +271,9 @@ export default function ServicesPage() {
         // 根据当前选中的分类ID筛选服务
         if (selectedCategoryId !== null) {
           setFilteredServices(
-            servicesList.filter((service: Service) => service.categoryId === selectedCategoryId)
+            servicesList.filter(
+              (service: Service) => service.categoryId === selectedCategoryId
+            )
           );
         } else {
           setFilteredServices(servicesList);
@@ -332,13 +338,17 @@ export default function ServicesPage() {
 
     // 应用分类筛选
     if (selectedCategoryId !== null) {
-      filtered = filtered.filter(service => service.categoryId === selectedCategoryId);
+      filtered = filtered.filter(
+        service => service.categoryId === selectedCategoryId
+      );
     }
 
     // 应用搜索筛选
     if (searchText) {
       const lowerSearchText = searchText.toLowerCase();
-      filtered = filtered.filter(service => service.name.toLowerCase().includes(lowerSearchText));
+      filtered = filtered.filter(service =>
+        service.name.toLowerCase().includes(lowerSearchText)
+      );
     }
 
     setFilteredServices(filtered);
@@ -487,7 +497,9 @@ export default function ServicesPage() {
       delete serviceData.tagIds;
 
       // 发送请求
-      const url = editingId ? `/api/admin/services/${editingId}` : '/api/admin/services';
+      const url = editingId
+        ? `/api/admin/services/${editingId}`
+        : '/api/admin/services';
       const method = editingId ? 'PUT' : 'POST';
 
       const response = await fetch(url, {
@@ -514,11 +526,15 @@ export default function ServicesPage() {
         // 重新获取服务列表，筛选条件会在fetchServices中应用
         fetchServices();
       } else {
-        message.error(data.message || (editingId ? '更新网站失败' : '添加网站失败'));
+        message.error(
+          data.message || (editingId ? '更新网站失败' : '添加网站失败')
+        );
       }
     } catch (error) {
       console.error(editingId ? '更新网站失败:' : '添加网站失败:', error);
-      message.error(editingId ? '更新网站失败，请稍后重试' : '添加网站失败，请稍后重试');
+      message.error(
+        editingId ? '更新网站失败，请稍后重试' : '添加网站失败，请稍后重试'
+      );
     }
   };
 
@@ -587,7 +603,9 @@ export default function ServicesPage() {
   };
 
   // 处理图标上传
-  const handleUploadChange: UploadProps['onChange'] = ({ fileList: newFileList }) => {
+  const handleUploadChange: UploadProps['onChange'] = ({
+    fileList: newFileList,
+  }) => {
     setFileList(newFileList);
   };
 
@@ -627,7 +645,14 @@ export default function ServicesPage() {
       width: 60,
       render: (icon: string | null) =>
         icon ? (
-          <div style={{ position: 'relative', width: 40, height: 40, cursor: 'pointer' }}>
+          <div
+            style={{
+              position: 'relative',
+              width: 40,
+              height: 40,
+              cursor: 'pointer',
+            }}
+          >
             <Image
               src={icon}
               alt="网站图标"
@@ -663,7 +688,8 @@ export default function ServicesPage() {
       dataIndex: 'categoryName',
       key: 'categoryName',
       width: 120,
-      sorter: (a: Service, b: Service) => a.categoryName?.localeCompare(b.categoryName || '') || 0,
+      sorter: (a: Service, b: Service) =>
+        a.categoryName?.localeCompare(b.categoryName || '') || 0,
     },
     {
       title: '标签',
@@ -734,7 +760,11 @@ export default function ServicesPage() {
           网站管理
         </Title>
         <Space>
-          <Button icon={<ReloadOutlined />} onClick={() => fetchServices()} loading={loading}>
+          <Button
+            icon={<ReloadOutlined />}
+            onClick={() => fetchServices()}
+            loading={loading}
+          >
             刷新
           </Button>
           <Button type="primary" icon={<PlusOutlined />} onClick={handleAdd}>
@@ -756,7 +786,9 @@ export default function ServicesPage() {
               {categories.map(category => (
                 <Button
                   key={category.id}
-                  type={selectedCategoryId === category.id ? 'primary' : 'default'}
+                  type={
+                    selectedCategoryId === category.id ? 'primary' : 'default'
+                  }
                   onClick={() => filterServices(category.id)}
                 >
                   {category.name}

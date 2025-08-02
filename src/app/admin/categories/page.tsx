@@ -59,7 +59,10 @@ type CategoriesAction =
   | { type: 'UPDATE_CATEGORY'; payload: Category }
   | { type: 'DELETE_CATEGORY'; payload: number };
 
-function categoriesReducer(state: Category[], action: CategoriesAction): Category[] {
+function categoriesReducer(
+  state: Category[],
+  action: CategoriesAction
+): Category[] {
   switch (action.type) {
     case 'SET_CATEGORIES':
       return action.payload;
@@ -92,7 +95,9 @@ function categoriesReducer(state: Category[], action: CategoriesAction): Categor
       return state;
     }
     case 'ADD_CATEGORY':
-      return [...state, action.payload].sort((a, b) => a.sortOrder - b.sortOrder);
+      return [...state, action.payload].sort(
+        (a, b) => a.sortOrder - b.sortOrder
+      );
     case 'UPDATE_CATEGORY': {
       const index = state.findIndex(item => item.id === action.payload.id);
       if (index !== -1) {
@@ -136,7 +141,9 @@ export default function CategoriesPage() {
 
       if (data.success) {
         // 按照 sortOrder 排序
-        const sortedCategories = [...data.data].sort((a, b) => a.sortOrder - b.sortOrder);
+        const sortedCategories = [...data.data].sort(
+          (a, b) => a.sortOrder - b.sortOrder
+        );
         dispatch({ type: 'SET_CATEGORIES', payload: sortedCategories });
       } else {
         adminMessage.error(data.message || '获取分类列表失败');
@@ -165,11 +172,19 @@ export default function CategoriesPage() {
   // 上传图标前的处理
   const beforeUpload = (file: File) => {
     // 检查文件类型
-    const validTypes = ['image/jpeg', 'image/png', 'image/gif', 'image/webp', 'image/svg+xml'];
+    const validTypes = [
+      'image/jpeg',
+      'image/png',
+      'image/gif',
+      'image/webp',
+      'image/svg+xml',
+    ];
 
     const isValidType = validTypes.includes(file.type);
     if (!isValidType) {
-      adminMessage.error('文件类型不支持，请上传图片文件（支持JPG、PNG、GIF、WebP、SVG格式）');
+      adminMessage.error(
+        '文件类型不支持，请上传图片文件（支持JPG、PNG、GIF、WebP、SVG格式）'
+      );
       return false;
     }
 
@@ -237,7 +252,9 @@ export default function CategoriesPage() {
         iconPath = currentCategory?.icon || null;
       }
 
-      const url = editingId ? `/api/admin/categories/${editingId}` : '/api/admin/categories';
+      const url = editingId
+        ? `/api/admin/categories/${editingId}`
+        : '/api/admin/categories';
       const method = editingId ? 'PUT' : 'POST';
 
       const response = await fetch(url, {
@@ -248,7 +265,8 @@ export default function CategoriesPage() {
         body: JSON.stringify({
           ...values,
           icon: iconPath,
-          sortOrder: values.sortOrder !== undefined ? Number(values.sortOrder) : 0,
+          sortOrder:
+            values.sortOrder !== undefined ? Number(values.sortOrder) : 0,
           seoTitle: values.seoTitle || null,
           seoDescription: values.seoDescription || null,
           seoKeywords: values.seoKeywords || null,
@@ -265,11 +283,15 @@ export default function CategoriesPage() {
         setFileList([]);
         fetchCategories();
       } else {
-        adminMessage.error(data.message || (editingId ? '更新分类失败' : '添加分类失败'));
+        adminMessage.error(
+          data.message || (editingId ? '更新分类失败' : '添加分类失败')
+        );
       }
     } catch (error) {
       console.error(editingId ? '更新分类失败:' : '添加分类失败:', error);
-      adminMessage.error(editingId ? '更新分类失败，请稍后重试' : '添加分类失败，请稍后重试');
+      adminMessage.error(
+        editingId ? '更新分类失败，请稍后重试' : '添加分类失败，请稍后重试'
+      );
     } finally {
       setUploading(false);
     }
@@ -334,7 +356,9 @@ export default function CategoriesPage() {
       // 获取所有分类
       const allCategories = [...categories];
       // 找到当前分类的索引
-      const currentIndex = allCategories.findIndex(item => item.id === record.id);
+      const currentIndex = allCategories.findIndex(
+        item => item.id === record.id
+      );
 
       // 如果已经是第一个，则不能再上移
       if (currentIndex === 0) {
@@ -395,7 +419,9 @@ export default function CategoriesPage() {
       // 获取所有分类
       const allCategories = [...categories];
       // 找到当前分类的索引
-      const currentIndex = allCategories.findIndex(item => item.id === record.id);
+      const currentIndex = allCategories.findIndex(
+        item => item.id === record.id
+      );
 
       // 如果已经是最后一个，则不能再下移
       if (currentIndex === allCategories.length - 1) {
@@ -721,7 +747,12 @@ export default function CategoriesPage() {
                 </Col>
                 <Col span={16}>
                   <Form.Item name="description" label="分类简介">
-                    <TextArea placeholder="请输入分类简介" rows={4} showCount maxLength={500} />
+                    <TextArea
+                      placeholder="请输入分类简介"
+                      rows={4}
+                      showCount
+                      maxLength={500}
+                    />
                   </Form.Item>
                 </Col>
               </Row>
@@ -747,7 +778,12 @@ export default function CategoriesPage() {
                   label="SEO 描述"
                   extra="用于搜索引擎优化，如不填写则使用分类简介"
                 >
-                  <TextArea placeholder="请输入 SEO 描述" rows={3} showCount maxLength={200} />
+                  <TextArea
+                    placeholder="请输入 SEO 描述"
+                    rows={3}
+                    showCount
+                    maxLength={200}
+                  />
                 </Form.Item>
 
                 <Form.Item
@@ -773,7 +809,11 @@ export default function CategoriesPage() {
       </Modal>
 
       {/* 图片预览 */}
-      <Modal open={!!previewImage} footer={null} onCancel={() => setPreviewImage(null)}>
+      <Modal
+        open={!!previewImage}
+        footer={null}
+        onCancel={() => setPreviewImage(null)}
+      >
         <div style={{ position: 'relative', width: '100%', height: '500px' }}>
           {previewImage && (
             <Image

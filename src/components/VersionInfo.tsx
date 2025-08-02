@@ -109,7 +109,9 @@ const VersionInfo: React.FC<VersionInfoProps> = ({ className }) => {
       setBuildInfo(prev => ({
         version: data.version || prev.version,
         buildId: data.buildId || prev.buildId,
-        buildTime: data.buildTime ? safeParseDate(data.buildTime) : prev.buildTime,
+        buildTime: data.buildTime
+          ? safeParseDate(data.buildTime)
+          : prev.buildTime,
       }));
     } catch (error) {
       console.error('获取版本信息文件失败:', error);
@@ -165,7 +167,9 @@ const VersionInfo: React.FC<VersionInfoProps> = ({ className }) => {
           maxWidth: 150,
         }}
       >
-        <Text style={{ fontSize: 12, color: '#999' }}>版本: {buildInfo.version}</Text>
+        <Text style={{ fontSize: 12, color: '#999' }}>
+          版本: {buildInfo.version}
+        </Text>
       </div>
       <div
         style={{

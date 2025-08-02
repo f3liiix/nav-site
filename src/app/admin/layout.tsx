@@ -181,7 +181,11 @@ export default function AdminLayout({
         </Sider>
         <Layout>
           <Header
-            style={{ padding: 0, background: colorBgContainer, borderBottom: '1px solid #f0f0f0' }}
+            style={{
+              padding: 0,
+              background: colorBgContainer,
+              borderBottom: '1px solid #f0f0f0',
+            }}
           >
             <Flex
               justify="flex-end"
@@ -193,7 +197,11 @@ export default function AdminLayout({
                   访问首页
                 </Button>
               </Link>
-              <Button type="text" icon={<LogoutOutlined />} onClick={handleLogout}>
+              <Button
+                type="text"
+                icon={<LogoutOutlined />}
+                onClick={handleLogout}
+              >
                 退出登录
               </Button>
             </Flex>

@@ -41,8 +41,16 @@ export async function POST(request: NextRequest) {
 
     // 解析请求数据
     const body = await request.json();
-    const { name, slug, description, icon, sortOrder, seoTitle, seoDescription, seoKeywords } =
-      body;
+    const {
+      name,
+      slug,
+      description,
+      icon,
+      sortOrder,
+      seoTitle,
+      seoDescription,
+      seoKeywords,
+    } = body;
 
     // 验证数据
     if (!name || typeof name !== 'string') {
@@ -86,7 +94,8 @@ export async function POST(request: NextRequest) {
       },
     });
 
-    const newSortOrder = sortOrder !== undefined ? sortOrder : (maxSortOrder?.sortOrder || 0) + 10;
+    const newSortOrder =
+      sortOrder !== undefined ? sortOrder : (maxSortOrder?.sortOrder || 0) + 10;
 
     // 创建分类
     const category = await prisma.category.create({

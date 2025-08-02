@@ -46,7 +46,9 @@ const tooltipStyles = {
 } as const;
 
 // 使用 React.memo 包装组件，避免不必要的重渲染
-const ServiceCard = React.memo(function ServiceCard({ service }: ServiceCardProps) {
+const ServiceCard = React.memo(function ServiceCard({
+  service,
+}: ServiceCardProps) {
   const [isImageLoaded, setIsImageLoaded] = useState(false);
   const [hasError, setHasError] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
@@ -156,8 +158,12 @@ const ServiceCard = React.memo(function ServiceCard({ service }: ServiceCardProp
 
           {/* 右侧内容 */}
           <div className="flex-1 min-w-0">
-            <h3 className="font-medium text-gray-900 truncate">{service.name}</h3>
-            <p className="text-sm text-gray-400 line-clamp-1">{service.description}</p>
+            <h3 className="font-medium text-gray-900 truncate">
+              {service.name}
+            </h3>
+            <p className="text-sm text-gray-400 line-clamp-1">
+              {service.description}
+            </p>
           </div>
         </div>
       </div>

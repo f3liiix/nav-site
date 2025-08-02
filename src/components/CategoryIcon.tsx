@@ -10,7 +10,12 @@ interface CategoryIconProps {
   color?: string;
 }
 
-export default function CategoryIcon({ icon, name, size = 16, color }: CategoryIconProps) {
+export default function CategoryIcon({
+  icon,
+  name,
+  size = 16,
+  color,
+}: CategoryIconProps) {
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(false);
   const loadingRef = useRef<HTMLDivElement>(null);
@@ -35,7 +40,10 @@ export default function CategoryIcon({ icon, name, size = 16, color }: CategoryI
   // 如果是SVG且需要设置颜色
   if (icon.endsWith('.svg') && color) {
     return (
-      <div className="relative flex-shrink-0" style={{ width: size, height: size }}>
+      <div
+        className="relative flex-shrink-0"
+        style={{ width: size, height: size }}
+      >
         {/* 加载中显示loading样式 */}
         <div
           ref={loadingRef}
@@ -65,7 +73,9 @@ export default function CategoryIcon({ icon, name, size = 16, color }: CategoryI
 
         {error && (
           <div className="absolute inset-0 flex items-center justify-center bg-gray-200 rounded z-20">
-            <span className="text-xs font-bold">{name.charAt(0).toUpperCase()}</span>
+            <span className="text-xs font-bold">
+              {name.charAt(0).toUpperCase()}
+            </span>
           </div>
         )}
       </div>
@@ -74,7 +84,10 @@ export default function CategoryIcon({ icon, name, size = 16, color }: CategoryI
 
   // 普通图标
   return (
-    <div className="relative flex-shrink-0" style={{ width: size, height: size }}>
+    <div
+      className="relative flex-shrink-0"
+      style={{ width: size, height: size }}
+    >
       {/* 加载中显示loading样式 */}
       <div
         ref={loadingRef}
@@ -103,7 +116,9 @@ export default function CategoryIcon({ icon, name, size = 16, color }: CategoryI
 
       {error && (
         <div className="absolute inset-0 flex items-center justify-center bg-brand-100 rounded z-20">
-          <span className="text-xs font-bold">{name.charAt(0).toUpperCase()}</span>
+          <span className="text-xs font-bold">
+            {name.charAt(0).toUpperCase()}
+          </span>
         </div>
       )}
     </div>

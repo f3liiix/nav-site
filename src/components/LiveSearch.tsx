@@ -63,7 +63,9 @@ export default function LiveSearch() {
 
       try {
         setLoading(true);
-        const response = await fetch(`/api/live-search?q=${encodeURIComponent(query.trim())}`);
+        const response = await fetch(
+          `/api/live-search?q=${encodeURIComponent(query.trim())}`
+        );
         const data = await response.json();
 
         if (data.success) {
@@ -179,7 +181,8 @@ export default function LiveSearch() {
   useEffect(() => {
     if (selectedIndex >= 0 && resultsRef.current) {
       // 获取结果项元素（考虑到我们添加了包装div）
-      const resultItems = resultsRef.current.querySelectorAll('[data-result-item]');
+      const resultItems =
+        resultsRef.current.querySelectorAll('[data-result-item]');
       const selectedElement = resultItems[selectedIndex] as HTMLElement;
 
       if (selectedElement) {
@@ -203,7 +206,9 @@ export default function LiveSearch() {
         <form onSubmit={handleSubmit} className="relative w-full">
           <div
             className={`flex items-center ${
-              isFocused || (showResults && results.length > 0) ? 'bg-white shadow-md' : 'bg-gray-50'
+              isFocused || (showResults && results.length > 0)
+                ? 'bg-white shadow-md'
+                : 'bg-gray-50'
             } border-2 ${
               isFocused || (showResults && results.length > 0)
                 ? 'border-brand-400'
@@ -214,7 +219,8 @@ export default function LiveSearch() {
                 : 'rounded-lg'
             } overflow-hidden relative z-10`}
             style={{
-              borderBottomWidth: showResults && results.length > 0 ? '0px' : '2px',
+              borderBottomWidth:
+                showResults && results.length > 0 ? '0px' : '2px',
               marginBottom: showResults && results.length > 0 ? '2px' : '0px',
               transition: 'background-color 0.2s, border-color 0.2s',
             }}
@@ -257,7 +263,8 @@ export default function LiveSearch() {
             ref={resultsRef}
             className="absolute w-full bg-white overflow-hidden custom-scrollbar max-h-80 overflow-y-auto border-2 border-brand-400 rounded-b-lg z-0"
             style={{
-              boxShadow: '0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.05)',
+              boxShadow:
+                '0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.05)',
               top: 'calc(100% - 2px)', // 向上偏移2px，与搜索框边框重叠
               borderTopWidth: '0', // 移除顶部边框
               transition: 'none', // 禁用任何可能的过渡动画
@@ -269,7 +276,9 @@ export default function LiveSearch() {
                   key={result.id}
                   data-result-item
                   className={`px-4 py-3 border-y border-transparent cursor-pointer transition-colors duration-150 ${
-                    selectedIndex === index ? 'bg-brand-50 border-brand-100' : 'hover:bg-brand-50'
+                    selectedIndex === index
+                      ? 'bg-brand-50 border-brand-100'
+                      : 'hover:bg-brand-50'
                   }`}
                   onClick={() => handleResultClick(result)}
                   onMouseEnter={() => setSelectedIndex(index)}
@@ -296,7 +305,9 @@ export default function LiveSearch() {
                     </div>
                     <div className="flex-1">
                       <div className="text-sm font-medium text-gray-800 flex items-center">
-                        {result.isTag && <span className="text-brand-400 mr-1">#</span>}
+                        {result.isTag && (
+                          <span className="text-brand-400 mr-1">#</span>
+                        )}
                         {result.name}
                       </div>
                       <div className="text-xs text-gray-400 line-clamp-1 mt-0.5">

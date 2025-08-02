@@ -47,7 +47,9 @@ export async function generateMetadata({
   // 使用分类的 SEO 设置，如果没有则使用默认值
   const title = category.seoTitle || `${category.name} - ${settings.siteName}`;
   const description =
-    category.seoDescription || category.description || `${category.name}分类下的AI服务和应用`;
+    category.seoDescription ||
+    category.description ||
+    `${category.name}分类下的AI服务和应用`;
   const keywords = category.seoKeywords || settings.seoKeywords;
 
   return {
@@ -104,7 +106,9 @@ async function getCategoryWithServices(
 
   // 根据排序参数设置排序条件
   const orderBy =
-    sortBy === 'clicks' ? { clickCount: 'desc' as const } : { createdAt: 'desc' as const };
+    sortBy === 'clicks'
+      ? { clickCount: 'desc' as const }
+      : { createdAt: 'desc' as const };
 
   // 获取当前页的服务
   const services = (await prisma.service.findMany({
@@ -127,7 +131,10 @@ async function getCategoryWithServices(
   };
 }
 
-export default async function CategoryPage({ params, searchParams }: CategoryPageProps) {
+export default async function CategoryPage({
+  params,
+  searchParams,
+}: CategoryPageProps) {
   // 解析Promise获取参数
   const resolvedParams = await params;
   const slug = resolvedParams.slug;
@@ -135,19 +142,22 @@ export default async function CategoryPage({ params, searchParams }: CategoryPag
   // 解析searchParams
   const resolvedSearchParams = await searchParams;
   const pageParam = resolvedSearchParams.page;
-  const page = pageParam ? parseInt(Array.isArray(pageParam) ? pageParam[0] : pageParam) : 1;
+  const page = pageParam
+    ? parseInt(Array.isArray(pageParam) ? pageParam[0] : pageParam)
+    : 1;
 
   // 获取排序参数
   const sortParam = resolvedSearchParams.sort;
-  const sort = sortParam ? (Array.isArray(sortParam) ? sortParam[0] : sortParam) : 'clicks';
+  const sort = sortParam
+    ? Array.isArray(sortParam)
+      ? sortParam[0]
+      : sortParam
+    : 'clicks';
   const sortBy = sort === 'time' ? 'createdAt' : 'clicks';
 
   // 获取分类及其服务
-  const { category, services, totalCount, totalPages } = await getCategoryWithServices(
-    slug,
-    page,
-    sortBy as 'clicks' | 'createdAt'
-  );
+  const { category, services, totalCount, totalPages } =
+    await getCategoryWithServices(slug, page, sortBy as 'clicks' | 'createdAt');
 
   // 如果分类不存在，返回404
   if (!category) {
@@ -204,7 +214,9 @@ export default async function CategoryPage({ params, searchParams }: CategoryPag
 
           {category.description && (
             <div className="mt-2 sm:mt-0 ml-0 sm:ml-8 text-center">
-              <p className="text-gray-500 leading-relaxed">{category.description}</p>
+              <p className="text-gray-500 leading-relaxed">
+                {category.description}
+              </p>
             </div>
           )}
         </div>
@@ -212,8 +224,8 @@ export default async function CategoryPage({ params, searchParams }: CategoryPag
 
       <div className="flex justify-between items-center mb-6">
         <h3 className="text-gray-500">
-          共 <span className="font-medium text-brand-400">{totalCount}</span> 个网站{' '}
-          {totalPages > 1 && `(第 ${page}/${totalPages} 页)`}
+          共 <span className="font-medium text-brand-400">{totalCount}</span>{' '}
+          个网站 {totalPages > 1 && `(第 ${page}/${totalPages} 页)`}
         </h3>
 
         <div className="flex space-x-2">

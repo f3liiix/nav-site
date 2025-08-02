@@ -117,7 +117,9 @@ export default function Pagination({
           >
             1
           </Link>
-          {pageNumbers[0] > 2 && <span className="px-3 py-2 text-gray-400">...</span>}
+          {pageNumbers[0] > 2 && (
+            <span className="px-3 py-2 text-gray-400">...</span>
+          )}
         </>
       )}
 

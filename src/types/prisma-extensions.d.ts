@@ -24,14 +24,22 @@ declare module '@prisma/client' {
       delete: (args: Prisma.TagDeleteArgs) => Promise<Tag>;
     };
     serviceTag: {
-      findUnique: (args: Prisma.ServiceTagFindUniqueArgs) => Promise<ServiceTag | null>;
-      findFirst: (args: Prisma.ServiceTagFindFirstArgs) => Promise<ServiceTag | null>;
+      findUnique: (
+        args: Prisma.ServiceTagFindUniqueArgs
+      ) => Promise<ServiceTag | null>;
+      findFirst: (
+        args: Prisma.ServiceTagFindFirstArgs
+      ) => Promise<ServiceTag | null>;
       findMany: (args: Prisma.ServiceTagFindManyArgs) => Promise<ServiceTag[]>;
       create: (args: Prisma.ServiceTagCreateArgs) => Promise<ServiceTag>;
-      createMany: (args: Prisma.ServiceTagCreateManyArgs) => Promise<Prisma.BatchPayload>;
+      createMany: (
+        args: Prisma.ServiceTagCreateManyArgs
+      ) => Promise<Prisma.BatchPayload>;
       update: (args: Prisma.ServiceTagUpdateArgs) => Promise<ServiceTag>;
       delete: (args: Prisma.ServiceTagDeleteArgs) => Promise<ServiceTag>;
-      deleteMany: (args: Prisma.ServiceTagDeleteManyArgs) => Promise<Prisma.BatchPayload>;
+      deleteMany: (
+        args: Prisma.ServiceTagDeleteManyArgs
+      ) => Promise<Prisma.BatchPayload>;
     };
   }
 

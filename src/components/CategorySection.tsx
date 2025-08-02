@@ -10,7 +10,11 @@ interface CategorySectionProps {
   tags?: Tag[];
 }
 
-export default function CategorySection({ category, services, tags = [] }: CategorySectionProps) {
+export default function CategorySection({
+  category,
+  services,
+  tags = [],
+}: CategorySectionProps) {
   if (services.length === 0) return null;
 
   return (

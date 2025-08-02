@@ -92,7 +92,10 @@ async function searchServices(query: string, tag?: string): Promise<Service[]> {
 }
 
 // 使用正确的Next.js 15参数类型
-export default async function SearchPage({ searchParams, params }: SearchPageProps) {
+export default async function SearchPage({
+  searchParams,
+  params,
+}: SearchPageProps) {
   // 解析Promise获取参数
   await params;
 
@@ -100,8 +103,12 @@ export default async function SearchPage({ searchParams, params }: SearchPagePro
   const resolvedSearchParams = await searchParams;
 
   // 从 searchParams 获取查询参数
-  const query = typeof resolvedSearchParams?.q === 'string' ? resolvedSearchParams.q : '';
-  const tag = typeof resolvedSearchParams?.tag === 'string' ? resolvedSearchParams.tag : '';
+  const query =
+    typeof resolvedSearchParams?.q === 'string' ? resolvedSearchParams.q : '';
+  const tag =
+    typeof resolvedSearchParams?.tag === 'string'
+      ? resolvedSearchParams.tag
+      : '';
 
   // 如果没有查询参数和标签参数，重定向到首页
   if (!query && !tag) {
@@ -156,8 +163,10 @@ export default async function SearchPage({ searchParams, params }: SearchPagePro
 
       <div className="bg-white bg-opacity-60 rounded-lg shadow-sm p-6 mb-6">
         <h1 className="text-2xl font-bold">
-          搜索 <span className="text-brand-400">&quot;{query}&quot;</span> 共找到{' '}
-          <span className="font-medium text-brand-400">{services.length}</span> 个结果
+          搜索 <span className="text-brand-400">&quot;{query}&quot;</span>{' '}
+          共找到{' '}
+          <span className="font-medium text-brand-400">{services.length}</span>{' '}
+          个结果
         </h1>
       </div>
 
@@ -186,19 +195,26 @@ export default async function SearchPage({ searchParams, params }: SearchPagePro
       {/* 搜索结果 */}
       {services.length > 0 ? (
         <div className="space-y-6">
-          {Object.entries(servicesByCategory).map(([categoryName, categoryServices]) => (
-            <div key={categoryName} className="bg-white bg-opacity-60 rounded-lg shadow-sm p-6">
-              <h2 className="text-xl font-semibold text-gray-700 mb-4 flex items-center">
-                <span>{categoryName}</span>
-                <span className="ml-2 text-sm text-gray-500">({categoryServices.length})</span>
-              </h2>
-              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-                {categoryServices.map(service => (
-                  <ServiceCard key={service.id} service={service} />
-                ))}
+          {Object.entries(servicesByCategory).map(
+            ([categoryName, categoryServices]) => (
+              <div
+                key={categoryName}
+                className="bg-white bg-opacity-60 rounded-lg shadow-sm p-6"
+              >
+                <h2 className="text-xl font-semibold text-gray-700 mb-4 flex items-center">
+                  <span>{categoryName}</span>
+                  <span className="ml-2 text-sm text-gray-500">
+                    ({categoryServices.length})
+                  </span>
+                </h2>
+                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+                  {categoryServices.map(service => (
+                    <ServiceCard key={service.id} service={service} />
+                  ))}
+                </div>
               </div>
-            </div>
-          ))}
+            )
+          )}
         </div>
       ) : (
         <div className="bg-white bg-opacity-60 rounded-lg shadow-sm p-12 text-center">
@@ -217,9 +233,13 @@ export default async function SearchPage({ searchParams, params }: SearchPagePro
               />
             </svg>
           </div>
-          <h2 className="text-xl font-semibold text-gray-700 mb-2">未找到相关结果</h2>
+          <h2 className="text-xl font-semibold text-gray-700 mb-2">
+            未找到相关结果
+          </h2>
           <p className="text-gray-500 mb-6">
-            {query ? `没有找到与"${query}"相关的服务` : `没有找到与标签"${tag}"相关的服务`}
+            {query
+              ? `没有找到与"${query}"相关的服务`
+              : `没有找到与标签"${tag}"相关的服务`}
           </p>
           <Link
             href="/"

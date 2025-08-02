@@ -10,7 +10,10 @@ import {
 } from '@/utils/api';
 
 // 根据名称获取标签
-export async function GET(request: NextRequest, { params }: { params: Promise<{ name: string }> }) {
+export async function GET(
+  request: NextRequest,
+  { params }: { params: Promise<{ name: string }> }
+) {
   try {
     // 验证管理员身份
     const isAdmin = await verifyAdmin(request);

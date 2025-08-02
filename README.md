@@ -1,120 +1,106 @@
-# AI导航站程序
+# nav-site - AI导航网站
 
-一个收录AI服务和应用的导航网站，方便用户快速访问和检索AI工具。
+一个收录AI服务和应用的导航网站，旨在帮助用户快速访问和检索AI工具，提升使用效率。
+
+## 功能特性
+
+- 响应式设计，适配各种设备
+- 实时搜索、分类、标签浏览
+- 点击统计功能
+- 管理后台（分类、服务、标签管理）
+- Banner管理
+- 用户账户管理
 
 ## 技术栈
 
-- 前端：Next.js + TypeScript + Tailwind CSS
-- 后台：Ant Design
+- 前端：Next.js v15.2.1 + TypeScript + Tailwind CSS v3.4.17
+- 后端：Next.js API 路由 + Prisma ORM
+- UI框架：Ant Design v5.24.3 + Ant Design Icons v5.6.1
 - 数据库：MySQL
 - 缓存：Redis
-- 容器化：Docker(可选)
+- 部署：Docker + Docker Compose 或 Node.js
 
-## 功能特点
+## 环境要求
 
-- 响应式设计，适配各种设备
-- 实时搜索、分类、标签、点击统计，基本功能齐全
-- 独立的管理后台
+- Node.js v18.x
+- Docker 和 Docker Compose（可选，用于Docker部署）
+- MySQL（Node.js部署时需要独立安装）
+- Redis（Node.js部署时需要独立安装）
 
-## Nodejs 部署（需单独安装MySQL/Redis服务）
-
-#### 一、配置环境变量
-
-根目录创建`.env`文件，并根据实际情况修改配置：
-
-```env
-# 数据库配置
-DATABASE_URL="mysql://用户名:密码@localhost:3306/数据库名"
-
-# 应用配置
-NEXT_PUBLIC_API_URL="http://localhost:3000/api"
-NEXT_PUBLIC_SITE_NAME="123导航"
-NEXT_PUBLIC_UPLOAD_DIR="uploads"
-
-# Redis配置
-REDIS_HOST=localhost
-REDIS_PORT=6379
-REDIS_DB=0
-REDIS_PASSWORD=your_redis_password
-```
-
-#### 二、一键启动
-
-进入项目根目录，运行
+## 安装
 
 ```bash
-./deploy.sh
+npm install
 ```
 
-#### 三、系统初始化
+## 部署方式
 
-首次运行时，访问 [http://localhost:3000/api/init](http://localhost:3000/api/init) 初始化系统，这将创建默认的管理员账户和分类。
+项目支持两种部署方式：Docker部署和Node.js部署。两种方式使用不同的环境变量配置。
 
-默认管理员账户：
+### Docker部署（推荐）
 
-- 用户名：admin
-- 密码：admin123
+使用Docker部署可以一键启动所有服务（包括MySQL和Redis）：
 
-访问 [http://localhost:3000/admin](http://localhost:3000/admin) 进入管理后台。
+1. 复制环境变量示例文件并按需修改：
 
-## Docker 部署（MySQL/Redis会集成在Docker容器中）
+   ```bash
+   cp .env.example .env
+   # 编辑 .env 文件中的密码配置
+   ```
 
-使用 Docker Compose 可以一键启动所有服务（无需手动安装 MySQL 和 Redis）：
+2. 启动所有服务：
 
-1. 确保已安装 Docker 和 Docker Compose
-2. 在项目根目录创建 `.env` 文件，配置环境变量
+   ```bash
+   docker-compose up -d
+   ```
 
-> 提示：对于快速部署，您可以直接使用默认配置，无需修改 `.env` 文件。如果需要自定义配置，可以修改以下环境变量：
+3. 初始化数据库（首次部署时）：
+   ```bash
+   docker-compose exec web npm run init
+   ```
 
-```properties
-# MySQL 配置（默认值已经可用，如无特殊需求无需修改）
-MYSQL_DATABASE=nav_site
-MYSQL_USER=nav_user
-MYSQL_PASSWORD=nav_password
-MYSQL_ROOT_PASSWORD=root_password
+### Node.js部署
 
-# 数据库和Redis连接配置（使用Docker服务名）
-DATABASE_URL="mysql://${MYSQL_USER}:${MYSQL_PASSWORD}@db:3306/${MYSQL_DATABASE}"
-REDIS_HOST=redis
-REDIS_PORT=6379
-REDIS_URL="redis://${REDIS_HOST}:${REDIS_PORT}"
+Node.js部署需要您已经安装并运行了MySQL和Redis服务：
 
-# 应用配置（默认值已可用）
-NEXT_PUBLIC_API_URL="http://localhost:3000/api"
-NEXT_PUBLIC_UPLOAD_DIR="uploads"
-```
+1. 安装MySQL和Redis并确保它们正在运行
 
-3. 一键启动所有服务：
+2. 复制环境变量示例文件并按需修改：
+
+   ```bash
+   cp .env.example .env
+   # 编辑 .env 文件，确保数据库和Redis配置正确
+   ```
+
+3. 运行部署脚本：
+   ```bash
+   ./deploy.sh
+   ```
+
+## 开发
 
 ```bash
-docker-compose up -d
+npm run dev
 ```
 
-4. 访问以下地址初始化系统：
-   - 系统初始化：[http://localhost:3000/api/init](http://localhost:3000/api/init)
-   - 管理后台：[http://localhost:3000/admin](http://localhost:3000/admin)
-   - 默认管理员账户：admin / admin123
-
-常用运维命令：
+## 构建
 
 ```bash
-# 查看服务状态
-docker-compose ps
-
-# 查看服务日志
-docker-compose logs -f
-
-# 停止所有服务
-docker-compose down
-
-# 重新构建并启动服务
-docker-compose up -d --build
+npm run build
 ```
 
-## 赞助商
+## 启动
 
-- [YxVM](https://yxvm.com/)
+由于项目配置了 `output: standalone`，启动方式有所不同：
 
-## 许可证
+- 使用 `npm start` 启动应用（内部实际执行 `node .next/standalone/server.js`）
+- 或者直接运行 `node .next/standalone/server.js`
 
-MIT
+应用默认监听 8080 端口，你可以通过访问 `http://localhost:8080` 来访问该应用。
+可以通过设置环境变量 `PORT` 来更改默认端口。
+
+## 注意事项
+
+1. Docker部署时，数据库和Redis服务由docker-compose自动管理
+2. Node.js部署时，需要您自行安装和配置MySQL和Redis
+3. 两种部署方式使用不同的主机地址配置（Docker使用服务名，Node.js使用localhost）

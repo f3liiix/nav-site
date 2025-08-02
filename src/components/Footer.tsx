@@ -8,7 +8,11 @@ type FooterProps = {
   statisticsCode?: string;
 };
 
-export default function Footer({ siteName, siteDescription, statisticsCode }: FooterProps) {
+export default function Footer({
+  siteName,
+  siteDescription,
+  statisticsCode,
+}: FooterProps) {
   const year = new Date().getFullYear();
 
   return (
@@ -16,11 +20,17 @@ export default function Footer({ siteName, siteDescription, statisticsCode }: Fo
       <footer className="py-6 text-sm">
         <div className="container mx-auto px-4 max-w-[960px]">
           <div className="flex space-x-4 items-center justify-center">
-            <Link href="/" className="text-gray-600 hover:text-brand-400 transition-colors">
+            <Link
+              href="/"
+              className="text-gray-600 hover:text-brand-400 transition-colors"
+            >
               首页
             </Link>
             <span className="text-brand-100">|</span>
-            <Link href="/about" className="text-gray-600 hover:text-brand-400 transition-colors">
+            <Link
+              href="/about"
+              className="text-gray-600 hover:text-brand-400 transition-colors"
+            >
               关于我们
             </Link>
           </div>
@@ -34,7 +44,9 @@ export default function Footer({ siteName, siteDescription, statisticsCode }: Fo
       </footer>
 
       {/* 统计代码 */}
-      {statisticsCode && <div dangerouslySetInnerHTML={{ __html: statisticsCode }} />}
+      {statisticsCode && (
+        <div dangerouslySetInnerHTML={{ __html: statisticsCode }} />
+      )}
     </>
   );
 }

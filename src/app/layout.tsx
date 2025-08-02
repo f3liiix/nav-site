@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import { getSiteSettings } from '@/utils/settings';
+import './(site)/globals.css'; // 添加全局CSS导入
 
 // 使用动态元数据
 export async function generateMetadata(): Promise<Metadata> {

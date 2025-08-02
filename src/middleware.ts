@@ -20,7 +20,10 @@ export async function middleware(request: NextRequest) {
     const response = NextResponse.next();
 
     // 添加缓存控制头，防止缓存
-    response.headers.set('Cache-Control', 'no-store, no-cache, must-revalidate, proxy-revalidate');
+    response.headers.set(
+      'Cache-Control',
+      'no-store, no-cache, must-revalidate, proxy-revalidate'
+    );
     response.headers.set('Pragma', 'no-cache');
     response.headers.set('Expires', '0');
 

@@ -40,8 +40,17 @@ export default function Navbar({ siteName }: NavbarProps) {
         <div className="flex flex-col md:flex-row items-center justify-between">
           {/* 左侧Logo */}
           <div className="flex items-center mb-4 md:mb-0 md:w-1/4">
-            <Link href="/" className="text-3xl font-bold text-gray-800 flex items-center">
-              <Image src="/logo.svg" alt={siteName} width={40} height={40} className="mr-1.5" />
+            <Link
+              href="/"
+              className="text-3xl font-bold text-gray-800 flex items-center"
+            >
+              <Image
+                src="/logo.svg"
+                alt={siteName}
+                width={40}
+                height={40}
+                className="mr-1.5"
+              />
               <div>
                 123<span className="text-normal text-brand-400">.SS</span>
               </div>

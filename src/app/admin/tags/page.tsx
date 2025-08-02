@@ -3,7 +3,17 @@
 // 导入Ant Design的React 19兼容补丁
 import '@ant-design/v5-patch-for-react-19';
 import { useState, useEffect, useCallback } from 'react';
-import { Table, Button, Space, Modal, Form, Input, Popconfirm, Typography, Flex } from 'antd';
+import {
+  Table,
+  Button,
+  Space,
+  Modal,
+  Form,
+  Input,
+  Popconfirm,
+  Typography,
+  Flex,
+} from 'antd';
 import type { TableProps } from 'antd';
 import type { SortOrder } from 'antd/es/table/interface';
 import { PlusOutlined, EditOutlined, DeleteOutlined } from '@ant-design/icons';
@@ -80,7 +90,9 @@ export default function TagsPage() {
       };
 
       // 发送请求
-      const url = editingId ? `/api/admin/tags/${editingId}` : '/api/admin/tags';
+      const url = editingId
+        ? `/api/admin/tags/${editingId}`
+        : '/api/admin/tags';
       const method = editingId ? 'PUT' : 'POST';
 
       const response = await fetch(url, {
@@ -101,11 +113,15 @@ export default function TagsPage() {
         // 重新获取标签列表
         await fetchTags();
       } else {
-        message.error(data.message || (editingId ? '更新标签失败' : '添加标签失败'));
+        message.error(
+          data.message || (editingId ? '更新标签失败' : '添加标签失败')
+        );
       }
     } catch (error) {
       console.error(editingId ? '更新标签失败:' : '添加标签失败:', error);
-      message.error(editingId ? '更新标签失败，请稍后重试' : '添加标签失败，请稍后重试');
+      message.error(
+        editingId ? '更新标签失败，请稍后重试' : '添加标签失败，请稍后重试'
+      );
     }
   };
 
@@ -165,7 +181,11 @@ export default function TagsPage() {
   };
 
   // 处理表格变化
-  const handleTableChange: TableProps<TagWithCount>['onChange'] = (_, __, sorter) => {
+  const handleTableChange: TableProps<TagWithCount>['onChange'] = (
+    _,
+    __,
+    sorter
+  ) => {
     if ('order' in sorter) {
       setSortOrder(sorter.order || 'descend');
     }
@@ -275,7 +295,10 @@ export default function TagsPage() {
 
           <Form.Item style={{ marginBottom: 0 }}>
             <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
-              <Button onClick={() => setModalVisible(false)} style={{ marginRight: 8 }}>
+              <Button
+                onClick={() => setModalVisible(false)}
+                style={{ marginRight: 8 }}
+              >
                 取消
               </Button>
               <Button type="primary" htmlType="submit">
