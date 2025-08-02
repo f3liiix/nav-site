@@ -8,7 +8,7 @@
 - 后台：Ant Design
 - 数据库：MySQL
 - 缓存：Redis
-- 容器化：Docker
+- 容器化：Docker(可选)
 
 ## 功能特点
 
@@ -39,6 +39,7 @@ REDIS_PASSWORD=your_redis_password
 ```
 
 #### 二、一键启动
+
 进入项目根目录，运行
 
 ```bash
@@ -72,7 +73,7 @@ MYSQL_USER=nav_user
 MYSQL_PASSWORD=nav_password
 MYSQL_ROOT_PASSWORD=root_password
 
-# 数据库和Redis连接配置（使用Docker服务名，无需修改）
+# 数据库和Redis连接配置（使用Docker服务名）
 DATABASE_URL="mysql://${MYSQL_USER}:${MYSQL_PASSWORD}@db:3306/${MYSQL_DATABASE}"
 REDIS_HOST=redis
 REDIS_PORT=6379
@@ -113,7 +114,6 @@ docker-compose up -d --build
 ## 赞助商
 
 - [YxVM](https://yxvm.com/)
-- [NodeSupport](https://github.com/NodeSeekDev/NodeSupport)
 
 ## 许可证
 
